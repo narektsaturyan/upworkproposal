@@ -1,0 +1,71 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<Microsoft.AspNetCore.Identity.IdentityUser> signInManager;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpcontext;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+
+
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-controller="Home" asp-action="AddContact">AddressBook</a>
+                 
+                
+
+
+            </div>
+            <div class="container">
+                <ul class="navbar-nav ml-auto">
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <a asp-action="Logout" asp-controller="Account">Logout @User.Identity.Name</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item col-md-6">
+                            <a asp-action="Login" asp-controller="Account">Login</a>
+                        </li>
+
+                        <li class="nav-item col-md-6">
+                            <a asp-action="Register" asp-controller="Account">Register</a>
+                        </li>
+
+                    }
+                </ul>
+            </div>
+
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - AddressBook - Created by Narek Tsaturyan
+            <span style="float: right" id="spanforlocation">@ViewBag.Country</span>
+        </div>
+
+    </footer>
+    @RenderSection("scripts", false)
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/site.js"></script>
+
+
+</body>
+</html>

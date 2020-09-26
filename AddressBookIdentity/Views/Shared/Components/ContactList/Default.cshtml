@@ -1,0 +1,20 @@
+﻿@model IEnumerable<AddressBookIdentity.Models.Contact>
+
+@{
+    
+    var contacts = Model.ToList();
+
+    var sortedContacts = (from c in contacts
+                          orderby c.name, c.lastName
+                          select c).ToList();
+    foreach (var item in sortedContacts)
+    {
+
+        <a class="btn btn-primary shadow-lg" style="width: 300px; margin: 5px; background-color: darkslategrey; border-color: darkslategrey; cursor: default;" asp-action="ViewContact" asp-controller="Home" asp-route-id="@item.id" role="button">@item.name @item.lastName</a>
+        <br />
+
+    }
+
+}
+
+
